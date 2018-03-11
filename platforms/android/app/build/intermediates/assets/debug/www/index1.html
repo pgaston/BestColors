@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' bestcolors-cf8ef05e.6854d846.svc.dockerapp.io:80  data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/jquery.mobile.icons-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/mobileThemeA.min.css" />
+
+    <!--
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+      -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>BestColors</title>
+</head>
+<body>
+    <div id="pgHome" data-role="page" style="background: url('images/P1BackGround.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" style="opacity: 0.4; ">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <div id="txtHomeMsgFromServer" style="font-size: small; color: red;"></div>
+            <p>
+                Best Colors provides you with the ability to
+                <ul>
+                    <li>find your best colors based on who you are - based on analysis from a selfie of you</li>
+                    <li>use those colors to identify which colors are great for you!</li>
+                </ul>
+                We find your colors in less than a minute - let's get started!...
+            </p>
+            <br />
+            <div style="text-align: center;">
+                <!-- class="ui-btn ui-btn-b ui-corner-all ui-btn-inline"  -->
+                <a href="#pgTakeSelfie" data-role="button" data-inline="true">Take a Selfie</a>
+            </div>
+
+        <p>
+            Performance can (currently) be extremely slow.    Working on this - just be patient for now.
+        </p>
+
+        <br />
+        <p>
+            For more information on what's behind Best Colors <a href="#pgMoreInformation">click here</a>.
+            <br /><br />
+            We greatly respect your privacy.  All activities and images may be used for analytic purposes only.   No personally identifiable information is retained.
+            <br />
+            Version 26.
+            <div id="numVisits"></div>
+        </p>
+
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+
+    <div id="pgViewPalette" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-nobackbtn="true">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a id="vwPalMailto" href="mailto:peter.gaston@gmail.com" data-role="button" data-icon="star" class="ui-btn-right">Feedback</a>
+        </div><!-- /header -->
+        <div data-role="content">
+            <div id="txtViewMsgFromServer" style="font-size: small; color: red;"></div>
+            <!--    <h3 style="text-align: center; margin-top: -10px;">Your Best Colors!</h3> -->
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="text-align: center;">
+                    <!--    <img id='vwPalMiniSelfie' src="" style="object-fit: none; object-position: center; border-radius: 60px; background: black;" /> -->
+                    <b>&nbsp;</b><br />
+                    <img id='vwPalMiniSelfie' src="" style="max-width: 200px; max-height: 180px;  border-radius: 90px; background: black;" />
+                </div>
+                <div class="ui-block-b" style="text-align: center;">
+                    <b>Your Color Wheel</b><br />
+                    <img id='vwPalWheel' src="" style="width: 150px; border-radius: 75px;">
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <b>Representative Colors</b><br />
+                <img id='vwPalColors' src="" style="width: 85%; max-height: 150px;">
+            </div>
+
+            <br />
+            <div style="text-align: center;">
+                <a href="#pgTakeImage" data-role="button" data-inline="true">Take a Picture - Use My Colors!</a>
+            </div>
+            <p>
+                <b>Use your colors!</b>   Take a picture in a store, in your home, wherever - and see what's good (and bad) for you!
+            </p>
+
+            <div style="text-align: center;">
+                <a href="#pgTakeSelfie" data-role="button" data-inline="true" data-theme="b">Re-take Selfie</a>
+            </div>
+            <br /><br />
+            <br /><br />
+
+            <p style="font-size: small; margin: 10px;">
+                For more information on what's behind Best Colors <a href="#pgMoreInformation">click here</a>.
+            </p>
+
+        </div><!-- /content -->
+    </div><!-- /page -->
+    <!-- used in all cases or the person messed up the first time -->
+    <div id="pgTakeSelfie" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-nobackbtn="true">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a href="#pgHome" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <p style="font-size: large; ">
+                Keys to a great selfie:
+                <ul>
+                    <li>Good, bright lighting</li>
+                    <li>No Shadows on your face, especially your eyes</li>
+                    <li><b>BIG EYES</b> to show the color of your iris</li>
+                </ul>
+            </p>
+
+            <div id="dvFileTake">
+                <div style="text-align: center;">
+                    <button id="btnTakeSelfieSnap" data-inline="true">Take a Selfie</button>
+                    <!-- don't show - doesn't work for phonegap
+    <span class="ui-btn ui-corner-all ui-btn-inline fileinput-button">
+        <span>Take a Selfie</span>
+        <input id="btnFileCamera" type="file" capture accept="image/*" data-role="none" />
+    </span>   -->
+                </div>
+                <br />
+                <p>
+                    You can also upload an image of an existing selfie from your camera roll.
+                </p>
+
+                <br />
+                <div style="text-align: center;">
+                    <button id="btnUploadSelfieSnap" data-inline="true">Upload a Selfie</button>
+<!--
+                    <span class="ui-btn ui-btn-b ui-corner-all ui-btn-inline fileinput-button">
+                        <span>Upload a Selfie</span>
+                        <input id="btnFileUpload" type="file" accept="image/*" data-role="none" />
+                    </span>
+    -->
+                </div>
+            </div>
+
+
+            <div id="dvFileSpecd">
+                <hr />
+                <div style="text-align: center;">
+                    <img id="imgUploadedImg" style="margin: auto; max-height:300px; max-width:100%; border: black solid 2px;">   <!-- width:320px; -->
+                </div>
+                <br />
+                <div style="text-align: center;">
+                    <a href="#pgSubmitSelfie" data-role="button" data-inline="true">Analyze Selfie</a>
+                </div>
+                <br />
+                <div style="text-align: center;">
+                    <button id="btnReTakeSelfie" data-inline="true" data-theme="b">Re-take Selfie</button>
+                </div>
+            </div>
+
+
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+
+    <div id="pgSubmitSelfie" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-add-back-btn="true">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a href="#pgViewPalette" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <p>
+                <!--  style='padding: 10px;' -->
+                Image is being analyzed.   This takes between 15 and 35+ seconds (yes - really slow - working on this...)   Please wait.
+            </p>
+
+            <div style="text-align: center;">
+                <img id="imgSnapshot" style="margin: auto; max-height:400px; max-width:100%; border: black solid 2px;">   <!-- width:320px; -->
+            </div>
+
+
+            <!--
+                    <div style="text-align: center;">
+                        <a id = "btnFakeGood" href="#" class="ui-btn ui-corner-all ui-btn-b ui-btn-inline">fake good</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a id = "btnFakeBad" href="#" class="ui-btn ui-corner-all ui-btn-b ui-btn-inline">fake bad</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a id = "btnFakeServerBad" href="#" class="ui-btn ui-corner-all ui-btn-b ui-btn-inline">fake server bad</a>
+                    </div>
+
+
+                    <div id="popSubmitFailed" data-role="popup">
+                        <h2><span id='txtSubmitError'>Server failed - sorry</span></h2>
+                    </div>
+            -->
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+
+
+    <div id="pgValidateResults" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-nobackbtn="true">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a href="#pgViewPalette" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <h3 style="text-align: center;  margin-top: -10px;">Validate Your Body Part Colors</h3>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div style="text-align: center;">
+                        <img id='vldPalMiniSelfie' style="object-fit: none; object-position: center; border-radius: 80px; background: black;" />  <!-- border-radius: 60px; -->
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div>
+                        <img id='vldPalSkin' src="" style="vertical-align:middle; width: 98%;">  <!--  mix-blend-mode: multiply; -->
+                        <span><b>Skin Colors</b></span>
+                    </div>
+                    <div>
+                        <img id='vldPalHair' src="" style="vertical-align:middle; width: 98%;">
+                        <span><b>Hair Colors</b></span>
+                    </div>
+                    <div>
+                        <img id='vldPalEye' src="" style="vertical-align:middle; width: 98%;">
+                        <span><b>Eye Colors</b></span>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <p>
+                Please validate that the colors shown here accurately represent the colors of your skin, hair, and eyes.   If they're off, please re-take your selfie in order to better capture your colors.
+            </p>
+
+            <div style="text-align: center;">
+                <a id="btnThisIsMe" href="#" data-role="button" data-inline="true">This is me!</a>
+            </div>
+            <div style="text-align: center;">
+                <a href="#pgTakeSelfie" data-role="button" data-inline="true" data-theme="b">Re-take Selfie</a>
+            </div>
+            <br />
+            <p>This is <b>very</b> important for good results.</p>
+
+
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+
+    <div id="pgTakeImage" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-nobackbtn="true">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a href="#pgViewPalette" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+        </div><!-- /header -->
+        <div data-role="content">
+            <p>
+                Take a picture where you'd like to see how your colors work.    Take a picture of a store, your closet, whatever...
+            </p>
+
+            <div id="dvImageFileTake">
+                <br />
+                <br />
+                <div style="text-align: center;">
+                    <button id="btnTakeImageSnap" data-inline="true">Take a Picture</button>
+                    <!--
+    <span class="ui-btn ui-corner-all ui-btn-inline fileinput-button">
+        <span>Take a Picture</span>
+        <input id="btnImageFileCamera" type="file" capture="camera" accept="image/*; camera" data-role="none" />
+    </span>
+    -->
+                </div>
+                <div style="text-align: center;">
+                    <button id="btnUploadImageSnap" data-inline="true">Upload a Picture</button>
+                    <!--
+                    <span class="ui-btn ui-btn-b ui-corner-all ui-btn-inline fileinput-button">
+                        <span>Upload a Picture</span>
+                        <input id="btnImageFileUpload" type="file" accept="image/*" data-role="none" />
+                    </span>
+                    -->
+                </div>
+            </div>
+
+            <div id="dvImageFileSpecd">
+                <hr />
+                <div style="text-align: center;">
+                    <img id="imgImageUploadedImg" style="margin: auto; max-height:400px; max-width:100%; border: black solid 2px;">   <!-- width:320px; -->
+                </div>
+                <p style="text-align: center;">
+                    Analyzing your picture...
+                </p>
+            </div>
+
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+
+
+    <div id="pgViewImageResults" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-add-back-btn="true">
+            <a id="vwImgMailto" href="mailto:peter.gaston@gmail.com" data-role="button" data-icon="star" class="ui-btn-left">Feedback</a>
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a href="#pgViewPalette" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+        </div><!-- /header -->
+        <div data-role="content">
+            <!-- margin-top: -10px; -->
+            <h3 style="text-align: center; ">Your Colors - Analysis Results!</h3>
+
+            <div style="margin-left: 15%; margin-right: 25%;">
+                <!-- style="left: 25%;"   text-align: left;      left: 30%; -->
+                <div id="crossfade">
+                    <!--  style="text-align: center;" -->
+                    <img id='vwImageOriginalResults' class="bottom" src="">
+                    <img id='vwImageMatchResults' class="top" src="">
+                </div>
+            </div>
+
+            <br /><br />
+            <div style="text-align: center;">
+                <a href="#pgTakeImage" data-role="button" data-inline="true">Take Another Picture - Use My Colors!</a>
+            </div>
+
+        </div><!-- /content -->
+        <div data-role="footer">
+
+            <p style="font-size: small; margin: 10px;">
+                For more information on what's behind Best Colors <a href="#pgMoreInformation">click here</a>.
+            </p>
+        </div>
+    </div><!-- /page -->
+
+    <div id="pgBadResults" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-nobackbtn="true">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a href="#pgHome" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <h3 style="text-align: center">Selfie Analysis Error</h3>
+            <p>
+                An error occurred while analyzing your selfie.
+            </p>
+
+            <div style="padding-left: 20px">
+                <div id="spShowError" style="font-weight: bold; font-style: italic;">
+                    nothing
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <div style="text-align: center;">
+                <a href="#pgTakeSelfie" data-role="button" data-inline="true">Re-take Selfie</a>
+            </div>
+
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+    <div id="pgBadImageResults" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-nobackbtn="true">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a href="#pgViewPalette" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-right">Home</a>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <h3 style="text-align: center">Image Analysis Error</h3>
+            <p>
+                An error occurred while analyzing your Image.
+            </p>
+
+            <div style="padding-left: 50px">
+                <div id="spShowImageError" style="font-weight: bold; font-style: italic;">
+                    nothing
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+
+            <div style="text-align: center;">
+                <a href="#pgTakeImage" data-role="button" data-inline="true">Re-take Image</a>
+            </div>
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+    <div id="pgMoreInformation" data-role="page" style="background: url('images/hairbg.png') no-repeat center center fixed !important; -webkit-background-size: cover; -moz-background-size: cover;  -o-background-size: cover; background-size: cover;">
+        <div data-role="header" data-add-back-btn="true">
+            <div align="center">
+                <img src="images/BCLogo.png" style="height:35px" alt="main logo" vspace="2">
+            </div>
+            <a id="vwMreInfoMailto" href="mailto:peter.gaston@gmail.com" data-role="button" data-icon="star" class="ui-btn-right">Feedback</a>
+        </div><!-- /header -->
+        <div data-role="content">
+            <h3 style="text-align: center;  margin-top: -5px;">Best Colors</h3>
+            <p>
+                Based on your colors - who you are - we determine the colors that are good for you - or bad for you.
+                We use a selfie to determine your key colors - from your skin, your hair, and your eyes.
+                Using Fashion Science we then build your personalized color wheel - showing what colors work best for you.
+            </p>
+            <p>
+                This is an ongoing research project.   Feel free to get involved!
+            </p>
+            <h3 style="text-align: center">Background</h3>
+            <p>
+                The goal is to identify the color of clothes that match best to you. With the right colors the claim is this makes you more attractive than wearing neutral or bad colors.
+            </p>
+            <p>
+                Historically the approach taken is seasonal colors, as illustrated by the popular book in the 1970's 'Color Me Beautiful'. This segments humans into four seasons - winter, spring, summer and fall - each season having specific colors that are appropriate for people in that season. Further refinement has taken the four seasons approach into more segments, still based on seasonality - 12 and 16 segments are common.
+            </p>
+            <p>
+
+                From our experimental data testing this approach - we have analyzed well over 100,000 selfies from a global sample - it just doesn't hold water that people segment this way. It turns out that humans range over this space in a continuous fashion rather than supporting a statistical bucketing. And anecdotally this was confirmed - "oh, I'm not really a Spring - in some cases I'm a Summer", ...
+            </p>
+            <p>
+
+                So the challenge was - how to create a personalized color wheel?
+            </p>
+            <h3 style="text-align: center">Fashion Science</h3>
+
+            <p>
+                Our approach - Personalization based on 'You'
+                We define the physical 'you' as your selfie - from which we identify your skin, hair, and eyes. Those colors define the current 'you'.
+            </p>
+            <p>
+                At that point we use color harmonies to determine the range of colors that work with 'you'. These color harmonies include:
+                <ul>
+                    <li>monochromatic</li>
+                    <li>complementary</li>
+                    <li>analogous.</li>
+                </ul>
+                (A fun tool to explore color harmonies is the <a href="https://color.adobe.com/" target="_blank">Adobe Kuhler tool - https://color.adobe.com/</a>
+                Note that all harmonies are based on the source colors. All colors in the color wheel can be traced back to the selfie.
+            </p>
+
+            <h3 style="text-align: center">The Real World</h3>
+
+            <p>
+                This works great in a perfect world, with perfect lighting, high quality cameras and color correction approaches such as a <a href="https://en.wikipedia.org/wiki/Gray_card" target="_blank">gray card</a>.   Unfortunately that isn't the normal world we live in.   Take a closer look at the selfies of your friends, say in Facebook.   Your eye is good at figuring out what 'skin' should be - but many selfies are far off what a 'human' should have for a skin tone.
+            </p>
+            <p>
+                Key issues we've seen, in well over 100,000 selfies so far include:
+                <ul>
+                    <li>Poor lighting, generally too dark</li>
+                    <li>Shadows from bright lighting, e.g., hiding the eyes</li>
+                    <li>Other poor composition including bright backgrounds that blend into the hair, and others</li>
+                    <li>Unknown errors generated by the smart phone camera image processing system (e.g., focusing on something other than the face for a selfie.)</li>
+                </ul>
+            </p>
+            <p>
+                An approach discovered here is a method to dynamically determine the appropriate adjustments on a selfie to bring colors back to the real world.    This is an AI algorithm (using a CNN) that is patent pending.
+            </p>
+            <p>
+                Note that evaluating a real world image, e.g., a store against a personalized color wheel involves using a non-corrected image.   This is a problem.   Currently we expand the error bars for matching, i.e., allowing more permissable colors.
+            </p>
+            <p>
+                Evaluating colors against a catalog, where the colors are explicit and 'correct' works very well.    There is a working demonstration available.
+            </p>
+
+            <h3 style="text-align: center">Common Questions</h3>
+            <ul>
+                <li><i>What about bright yellow for me? (or Green, Blue, etc.)</i> Go for it. By it's nature this approach (currently) won't find bright colors for you outside of your source colors (monochromatic harmony) - your source colors are generally low in saturation - or close to the center of the color wheel. This is an open topic of research.</li>
+                <li><i>What about highlights in my hair? Colored contacts? Strong make-up?</i> These colorations are used to define 'you', so your color wheel - your preferred colors will reflect the new 'you'.</li>
+                <li><i>What about patterns in fabric?</i> Patterns in fabrics are designed so that the individual colors work well together. Your color wheel will usually support all or none of the colors. If a partial match is identified then the science would indicate that this is not a good match.</li>
+            </ul>
+
+            <h3 style="text-align: center">Lastly - Collaboration and Research</h3>
+            <p>
+                This is an <a href="https://github.com/pgaston/BestColors" target="_blank">open source project</a>.
+                Collaborators are invited. There are many areas to be explored, ranging from the technical (code/hosting) to AI to fashion science and applicability.
+            </p>
+            <p>
+                Thanks to the core team so far: Peter, John, Cindi, and Bruce.
+            </p>
+            <p>
+                Please provide feedback/questions (button at top of window).
+            </p>
+        </div><!-- /content -->
+    </div><!-- /page -->
+
+
+
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="scripts/jquery-2.1.4.min.js"></script>
+    <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="scripts/BCMobile.js"></script>
+</body>
+</html>

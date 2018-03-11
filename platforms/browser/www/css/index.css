@@ -1,0 +1,89 @@
+
+[data-role=page] {
+    height: 100% !important;
+    position: relative !important;
+}
+
+[data-role=footer] {
+    bottom: 0;
+    position: absolute !important;
+    top: auto !important;
+    width: 100%;
+}
+
+
+.not-displayed {
+    display: none;
+}
+
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4);
+    font-size: 23px;
+    direction: ltr;
+    cursor: pointer;
+}
+
+
+#crossfade {
+    position: relative;
+    height: 300px;
+    // width: 100%;
+    // height: auto;
+    width: auto;
+    margin: 0 auto;
+}
+
+#crossfade img {
+    position: absolute;
+    left: 0;
+    height: 300px;
+    // left: 25%;
+    // width:100%;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+    #crossfade img.top {
+        animation-name: cf3FadeInOut;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-duration: 4s;
+        animation-direction: alternate;
+        // position:absolute;
+    }
+
+    #crossfade img:nth-of-type(1) {
+        animation-delay: 4s;
+    }
+
+    #crossfade img:nth-of-type(2) {
+        animation-delay: 2s;
+    }
+
+@keyframes cf3FadeInOut {
+    /* distributing times evenly */
+    0% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
